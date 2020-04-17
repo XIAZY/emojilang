@@ -10,17 +10,29 @@ mainParser :: Parser Expr
 mainParser = whitespaces *> expr <* eof
 
 expr :: Parser Expr
-expr = binary
+expr = adds
 
-binary :: Parser Expr
-binary = chainl1 operand op where
-    operand = unary
+adds :: Parser Expr
+adds = chainl1 operand op where
+    operand = muls
     op = (do
             operator [T.pack "➕"]
             return (Binary Add)
          ) <|> (do
             operator [T.pack "➖"]
-            return (Binary Sub))
+            return (Binary Sub)
+         )
+
+muls :: Parser Expr
+muls = chainl1 operand op where
+    operand = unary
+    op = (do
+            operator [T.pack "✖️"]
+            return (Binary Mult)
+         ) <|> (do
+             operator [T.pack "➗"]
+             return (Binary Div)
+         )
 
 unary :: Parser Expr
 unary = (do
