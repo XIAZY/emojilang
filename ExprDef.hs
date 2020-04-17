@@ -6,7 +6,7 @@ data Expr = LitInt Integer
     deriving (Eq, Show)
 
 
-data BinaryOp = Add
+data BinaryOp = Add | Sub
     deriving (Eq, Show)
 
 data UnaryOp = Neg

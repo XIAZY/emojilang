@@ -1,18 +1,21 @@
+-- copyright notice
+-- code here are modified from Prof Albert Lai's code at the University of Toronto
+
 module ParserLib where
 
 import Control.Applicative
 import Data.Char
 import Data.Functor
 import Data.List
-import Data.Text
+import qualified Data.Text as T
 import EmojiUtils
 
-data Parser a = MkParser ([Text] -> Maybe ([Text], a))
+data Parser a = MkParser ([T.Text] -> Maybe ([T.Text], a))
 
-unParser :: Parser a -> [Text] -> Maybe ([Text], a)
+unParser :: Parser a -> [T.Text] -> Maybe ([T.Text], a)
 unParser (MkParser sf) = sf
 
-runParser :: Parser a -> [Text] -> Maybe a
+runParser :: Parser a -> [T.Text] -> Maybe a
 runParser (MkParser sf) input = fmap (\(_,a) -> a) (sf input)
 
 instance Functor Parser where
@@ -79,21 +82,21 @@ instance Alternative Parser where
 -- character level parser
 
 -- | Read a character and return. Failure if input is empty.
-anyChar :: Parser Text
+anyChar :: Parser T.Text
 anyChar = MkParser sf
   where
     sf [] = Nothing
     sf (c:cs) = Just (cs, c)
 
 -- | Read a character and check against the given character.
-char :: Text -> Parser Text
+char :: T.Text -> Parser T.Text
 char wanted = MkParser sf
   where
     sf (c:cs) | c == wanted = Just (cs, c)
     sf _ = Nothing
 
 -- | Read a character and check against the given predicate.
-satisfy :: (Text -> Bool) -> Parser Text
+satisfy :: (T.Text -> Bool) -> Parser T.Text
 satisfy pred = MkParser sf
   where
     sf (c:cs) | pred c = Just (cs, c)
@@ -107,15 +110,51 @@ eof = MkParser sf
     sf _ = Nothing
 
 -- | Space or tab or newline (unix and windows).
-whitespace :: Parser Text
+whitespace :: Parser T.Text
 whitespace = satisfy (\c -> c `elem` ws) where
-  ws = Prelude.map pack ["\t", "\n", "\r", " "]
+  ws = Prelude.map T.pack ["\t", "\n", "\r", " "]
 
 -- -- | Consume zero or more whitespaces, maximum munch.
-whitespaces :: Parser [Text]
+whitespaces :: Parser [T.Text]
 whitespaces = many whitespace
 
--- -- credit of above code goes to Prof. Albert Lai at the University of Toronto
+-- | One or more operands separated by an operator. Apply the operator(s) in a
+-- right-associating way.
+chainr1 :: Parser a               -- ^ operand parser
+        -> Parser (a -> a -> a)   -- ^ operator parser
+        -> Parser a               -- ^ whole answer
+chainr1 getArg getOp = liftA2 link
+                       getArg
+                       (optional
+                         (liftA2 (,) getOp (chainr1 getArg getOp)))
+  where
+    link x Nothing = x
+    link x (Just (op,y)) = op x y
+
+-- | One or more operands separated by an operator. Apply the operator(s) in a
+-- left-associating way.
+chainl1 :: Parser a               -- ^ operand parser
+        -> Parser (a -> a -> a)   -- ^ operator parser
+        -> Parser a               -- ^ whole answer
+chainl1 getArg getOp = liftA2 link
+                       getArg
+                       (many (liftA2 (,) getOp getArg))
+  where
+    link x opys = foldl (\accum (op,y) -> op accum y) x opys
+
+-- token level primitives
 
 natural :: Parser Integer
 natural = fmap EmojiUtils.read (some (satisfy EmojiUtils.isDigit)) <* whitespaces
+
+-- | Read something that looks like an operator, then skip trailing spaces.
+anyOperator :: Parser [T.Text]
+anyOperator = some (satisfy symChar) <* whitespaces
+  where
+    symChar c = c `elem` (EmojiUtils.getEmoji "➕➖✖️➗")
+
+-- | Read the wanted operator, then skip trailing spaces.
+operator :: [T.Text] -> Parser [T.Text]
+operator wanted =
+    anyOperator
+    >>= \sym -> if sym == wanted then return wanted else empty
