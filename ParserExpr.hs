@@ -50,3 +50,4 @@ unary = (do
 
 atom :: Parser Expr
 atom = fmap LitInt natural
+            <|> (openParen *> expr <* closeParen)

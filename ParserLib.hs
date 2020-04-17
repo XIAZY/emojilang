@@ -158,3 +158,8 @@ operator :: [T.Text] -> Parser [T.Text]
 operator wanted =
     anyOperator
     >>= \sym -> if sym == wanted then return wanted else empty
+
+-- | Open and close parentheses.
+openParen, closeParen :: Parser T.Text
+openParen = (char (T.pack "👉")) <* whitespaces
+closeParen = (char (T.pack "👈")) <* whitespaces
