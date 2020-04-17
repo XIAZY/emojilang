@@ -18,13 +18,28 @@ getEmoji input = map ICU.brkBreak (getBreaks input)
 length :: String -> Int
 length input = Prelude.length (getBreaks input)
 
+-- according to unicode documentation:
+-- emoji_modification :=
+--     \p{EMod}
+--     | \x{FE0F} \x{20E3}?
+--     | tag_modifier
+
 -- digits
 digits :: Map.Map Text.Text Int
 digits = Map.fromList (map makeDigitMap [0..9])
     where makeDigitMap i = ((makeDigitEmoji i), i)
-          makeDigitEmoji i = Text.pack ((show i) ++ "\8419\65039")
+          makeDigitEmoji i = Text.pack ((show i) ++ "\65039\8419")
 
 isDigit :: Text.Text -> Bool
 isDigit t = case (Map.lookup t digits) of
                 Nothing -> False
                 Just a -> True
+
+getDigit :: Text.Text -> Maybe Int
+getDigit i = Map.lookup i digits
+
+read :: [Text.Text] -> Integer
+read = foldl addup 0 where
+    addup ten oneE = (ten*10 + (getInt oneE))
+    getInt e = case (getDigit e) of (Just d) -> toInteger d
+                                    (Nothing) -> error "non-digit emoji meet"
