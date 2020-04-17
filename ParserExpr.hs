@@ -10,7 +10,14 @@ mainParser :: Parser Expr
 mainParser = whitespaces *> expr <* eof
 
 expr :: Parser Expr
-expr = adds
+expr = cmp
+
+cmp :: Parser Expr
+cmp = (do
+        i <- adds
+        operator [T.pack "👀"]
+        j <- adds
+        return (Cmp Eq i j)) <|> adds
 
 adds :: Parser Expr
 adds = chainl1 operand op where

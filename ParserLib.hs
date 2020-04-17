@@ -151,7 +151,7 @@ natural = fmap EmojiUtils.read (some (satisfy EmojiUtils.isDigit)) <* whitespace
 anyOperator :: Parser [T.Text]
 anyOperator = some (satisfy symChar) <* whitespaces
   where
-    symChar c = c `elem` (EmojiUtils.getEmoji "➕➖✖️➗")
+    symChar c = c `elem` (EmojiUtils.getEmoji "➕➖✖️➗👀")
 
 -- | Read the wanted operator, then skip trailing spaces.
 operator :: [T.Text] -> Parser [T.Text]

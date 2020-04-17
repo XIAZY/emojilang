@@ -4,7 +4,8 @@
 Programming language using solely emoji
 
 ## EBNF (as for now)
-<expr> ::= <adds>
+<expr> ::= <cmp>
+<cmp> ::= <adds> "👀" <adds> | <adds>
 <adds> ::= <muls> {("➕" | "➖") <muls>}
 <muls> ::= <atom> {("✖️" | "➗") <atom>}
 <atom> ::= <bool> | <digit> | "🤜" <expr> "🤛">
