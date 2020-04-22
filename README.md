@@ -4,10 +4,11 @@
 Programming language using solely emoji
 
 ## EBNF (as for now)
-<expr> ::= <cmp>
-<cmp> ::= <adds> "👀" <adds> | <adds>
-<adds> ::= <muls> {("➕" | "➖") <muls>}
-<muls> ::= <atom> {("✖️" | "➗") <atom>}
+<expr> ::= <equality>
+<equality> ::= <relational> | <equality> "🙆" <relational> | <equality> "🙅" <relational>
+<relational> ::= <adds> // TODO
+<adds> ::= <muls> | <adds> "➕" <muls> | <adds> "➖" <muls>
+<muls> ::= <atom> | <muls> "✖️" <atom> | <muls> "➗" <atom>
 <atom> ::= <bool> | <digit> | "👉" <expr> "👈">
 <bool> ::= "👍" | "👎"
 <digit> ::= "0️⃣"|"1️⃣"|"2️⃣"|"3️⃣"|"4️⃣"|"5️⃣"|"6️⃣"|"7️⃣"|"8️⃣"|"9️⃣"
@@ -19,6 +20,6 @@ Most of above syntax is already working, actively adding more syntax for real wo
 
 Quick Demo
 ```
-*ParserExpr> runStringParser mainParser "1️⃣1️⃣4️⃣5️⃣1️⃣4️⃣👀👉5️⃣ ➕4️⃣4️⃣➗7️⃣👈"
+*ParserExpr> runStringParser mainParser "1️⃣1️⃣4️⃣5️⃣1️⃣4️⃣🙆👉5️⃣ ➕4️⃣4️⃣➗7️⃣👈"
 Just (Cmp Eq (LitInt 114514) (Binary Add (LitInt 5) (Binary Div (LitInt 44) (LitInt 7))))
 ```
