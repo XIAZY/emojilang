@@ -8,10 +8,20 @@ Programming language using solely emoji
 <equality> ::= <relational> 
              | <relational> "🙆" <relational>  // equal
              | <relational> "🙅" <relational> // not equal
-<relational> ::= <adds> // TODO
-<adds> ::= <muls> | <adds> "➕" <muls> | <adds> "➖" <muls>
-<muls> ::= <atom> | <muls> "✖️" <atom> | <muls> "➗" <atom>
-<atom> ::= <bool> | <digit> | "👉" <expr> "👈">
+<relational> ::= <adds>
+               | <adds> "↖️" <adds> // >
+               | <adds> "↖️⬅️" <adds> // >=
+               | <adds> "↗️" <adds> // <
+               | <adds> "➡️↗️" <adds> // <=
+<adds> ::= <muls>
+         | <adds> "➕" <muls>
+         | <adds> "➖" <muls>
+<muls> ::= <atom>
+         | <muls> "✖️" <atom> 
+         | <muls> "➗" <atom>
+<atom> ::= <bool> 
+         | <digit> 
+         | "👉" <expr> "👈">
 <bool> ::= "👍" | "👎"
 <digit> ::= "0️⃣"|"1️⃣"|"2️⃣"|"3️⃣"|"4️⃣"|"5️⃣"|"6️⃣"|"7️⃣"|"8️⃣"|"9️⃣"
 ```
