@@ -4,6 +4,7 @@
 Programming language using solely emoji
 
 ## EBNF (as for now)
+```
 <expr> ::= <equality>
 <equality> ::= <relational> 
              | <relational> "🙆" <relational>  // equal
