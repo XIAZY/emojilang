@@ -10,20 +10,41 @@ mainParser :: Parser Expr
 mainParser = whitespaces *> expr <* eof
 
 expr :: Parser Expr
-expr = cmp
+expr = equality
 
-cmp :: Parser Expr
-cmp = (do
-        i <- adds
+equality :: Parser Expr
+equality = (do
+        i <- relational
         operator [T.pack "🙆"]
-        j <- adds
+        j <- relational
         return (Equality Eq i j)
       ) <|> (do
-        i <- adds
+        i <- relational
         operator [T.pack "🙅"]
-        j <- adds
+        j <- relational
         return (Equality Ne i j)
-      ) <|> adds
+      ) <|> relational
+
+relational = (do
+                i <- adds
+                operator [T.pack "↖️"]
+                j <- adds
+                return (Relational Gt i j)
+            ) <|> (do
+                i <- adds
+                operator [T.pack "↖️", T.pack "⬅️"]
+                j <- adds
+                return (Relational Ge i j)
+            ) <|> (do
+                i <- adds
+                operator [T.pack "↗️"]
+                j <- adds
+                return (Relational Lt i j)
+            ) <|> (do
+                i <- adds
+                operator [T.pack "➡️", T.pack "↗️"]
+                j <- adds
+                return (Relational Le i j)) <|> adds
 
 adds :: Parser Expr
 adds = chainl1 operand op where

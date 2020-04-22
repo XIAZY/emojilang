@@ -4,6 +4,7 @@ data Expr = LitInt Integer
           | Binary BinaryOp Expr Expr
           | Unary UnaryOp Expr
           | Equality EqOp Expr Expr
+          | Relational RelationOp Expr Expr
     deriving (Eq, Show)
 
 data BinaryOp = Add | Sub | Mult | Div
@@ -13,4 +14,7 @@ data UnaryOp = Neg
     deriving (Eq, Show)
 
 data EqOp = Eq | Ne
+    deriving (Eq, Show)
+
+data RelationOp = Lt | Le | Gt | Ge
     deriving (Eq, Show)
