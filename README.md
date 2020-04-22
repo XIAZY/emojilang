@@ -5,7 +5,9 @@ Programming language using solely emoji
 
 ## EBNF (as for now)
 <expr> ::= <equality>
-<equality> ::= <relational> | <equality> "🙆" <relational> | <equality> "🙅" <relational>
+<equality> ::= <relational> 
+             | <relational> "🙆" <relational>  // equal
+             | <relational> "🙅" <relational> // not equal
 <relational> ::= <adds> // TODO
 <adds> ::= <muls> | <adds> "➕" <muls> | <adds> "➖" <muls>
 <muls> ::= <atom> | <muls> "✖️" <atom> | <muls> "➗" <atom>

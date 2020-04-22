@@ -3,7 +3,7 @@ module ExprDef where
 data Expr = LitInt Integer
           | Binary BinaryOp Expr Expr
           | Unary UnaryOp Expr
-          | Cmp CmpOp Expr Expr
+          | Equality EqOp Expr Expr
     deriving (Eq, Show)
 
 data BinaryOp = Add | Sub | Mult | Div
@@ -12,5 +12,5 @@ data BinaryOp = Add | Sub | Mult | Div
 data UnaryOp = Neg
     deriving (Eq, Show)
 
-data CmpOp = Eq
+data EqOp = Eq | Ne
     deriving (Eq, Show)

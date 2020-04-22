@@ -15,9 +15,15 @@ expr = cmp
 cmp :: Parser Expr
 cmp = (do
         i <- adds
-        operator [T.pack "👀"]
+        operator [T.pack "🙆"]
         j <- adds
-        return (Cmp Eq i j)) <|> adds
+        return (Equality Eq i j)
+      ) <|> (do
+        i <- adds
+        operator [T.pack "🙅"]
+        j <- adds
+        return (Equality Ne i j)
+      ) <|> adds
 
 adds :: Parser Expr
 adds = chainl1 operand op where
