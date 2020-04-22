@@ -5,7 +5,12 @@ Programming language using solely emoji
 
 ## EBNF (as for now)
 ```
-<expr> ::= <equality>
+<expr> ::= <conditional>
+<conditional> ::= <or>
+<or> ::= <and> 
+       | <or> "🔥" <and>
+<and> ::= <equality>
+        | <and> "📦" <equality> // <and> and <or> are under construction
 <equality> ::= <relational> 
              | <relational> "🙆" <relational>  // equal
              | <relational> "🙅" <relational> // not equal
