@@ -10,10 +10,10 @@ Programming language using solely emoji
 <or> ::= <and> 
        | <or> "🔥" <and>
 <and> ::= <equality>
-        | <and> "📦" <equality> // <and> and <or> are under construction
+        | <and> "📦" <equality>
 <equality> ::= <relational> 
-             | <relational> "🙆" <relational>
-             | <relational> "🙅" <relational>
+             | <relational> "🙆" <relational>  // equal
+             | <relational> "🙅" <relational> // not equal
 <relational> ::= <adds>
                | <adds> "↖️" <adds> // >
                | <adds> "↖️⬅️" <adds> // >=
