@@ -12,8 +12,8 @@ Programming language using solely emoji
 <and> ::= <equality>
         | <and> "📦" <equality> // <and> and <or> are under construction
 <equality> ::= <relational> 
-             | <relational> "🙆" <relational>  // equal
-             | <relational> "🙅" <relational> // not equal
+             | <relational> "🙆" <relational>
+             | <relational> "🙅" <relational>
 <relational> ::= <adds>
                | <adds> "↖️" <adds> // >
                | <adds> "↖️⬅️" <adds> // >=

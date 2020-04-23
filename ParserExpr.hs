@@ -10,7 +10,24 @@ mainParser :: Parser Expr
 mainParser = whitespaces *> expr <* eof
 
 expr :: Parser Expr
-expr = equality
+expr = conditional
+
+conditional :: Parser Expr
+conditional = logicalOr
+
+logicalOr :: Parser Expr
+logicalOr = chainl1 operand op where
+    operand = logicalAnd 
+    op = (do
+        operator [T.pack "🔥"]
+        return (Conditional LogicalOr))
+
+logicalAnd :: Parser Expr
+logicalAnd = chainl1 operand op where
+    operand = equality
+    op = (do
+        operator [T.pack "📦"]
+        return (Conditional LogicalAnd))
 
 equality :: Parser Expr
 equality = (do
@@ -25,6 +42,7 @@ equality = (do
         return (Equality Ne i j)
       ) <|> relational
 
+relational :: Parser Expr
 relational = (do
                 i <- adds
                 operator [T.pack "↖️"]
