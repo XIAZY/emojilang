@@ -6,6 +6,7 @@ data Expr = LitInt Integer
           | Equality EqOp Expr Expr
           | Relational RelationOp Expr Expr
           | Conditional LogicalOp Expr Expr
+          | Boolean Bool
     deriving (Eq, Show)
 
 data BinaryOp = Add | Sub | Mult | Div

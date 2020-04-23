@@ -30,6 +30,11 @@ digits = Map.fromList (map makeDigitMap [0..9])
     where makeDigitMap i = ((makeDigitEmoji i), i)
           makeDigitEmoji i = Text.pack ((show i) ++ "\65039\8419")
 
+isBoolean :: Text.Text -> Bool
+isBoolean c | c == (Text.pack "👍") = True
+            | c == (Text.pack "👎") = True
+            | otherwise = False
+
 isDigit :: Text.Text -> Bool
 isDigit t = case (Map.lookup t digits) of
                 Nothing -> False

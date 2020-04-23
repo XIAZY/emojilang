@@ -166,3 +166,7 @@ operator wanted =
 openParen, closeParen :: Parser T.Text
 openParen = (char (T.pack "👉")) <* whitespaces
 closeParen = (char (T.pack "👈")) <* whitespaces
+
+boolean :: Parser Bool
+boolean = satisfy isBoolean
+          >>= \c -> if c == (T.pack "👍") then return True else return False
