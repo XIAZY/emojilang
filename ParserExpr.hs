@@ -1,10 +1,10 @@
 module ParserExpr where
 
-import ExprDef
-import ParserLib
+import           ExprDef
+import           ParserLib
 
-import Control.Applicative
-import qualified Data.Text as T
+import           Control.Applicative
+import qualified Data.Text                     as T
 
 mainParser :: Parser Expr
 mainParser = whitespaces *> expr <* eof
@@ -16,98 +16,116 @@ conditional :: Parser Expr
 conditional = logicalOr
 
 logicalOr :: Parser Expr
-logicalOr = chainl1 operand op where
-    operand = logicalAnd 
-    op = (do
-        operator [T.pack "🔥"]
-        return (Conditional LogicalOr))
+logicalOr = chainl1 operand op  where
+    operand = logicalAnd
+    op =
+        (do
+            operator [T.pack "🔥"]
+            return (Conditional LogicalOr)
+        )
 
 logicalAnd :: Parser Expr
-logicalAnd = chainl1 operand op where
+logicalAnd = chainl1 operand op  where
     operand = equality
-    op = (do
-        operator [T.pack "📦"]
-        return (Conditional LogicalAnd))
+    op =
+        (do
+            operator [T.pack "📦"]
+            return (Conditional LogicalAnd)
+        )
 
 equality :: Parser Expr
-equality = (do
-        i <- relational
-        operator [T.pack "🙆"]
-        j <- relational
-        return (Equality Eq i j)
-      ) <|> (do
-        i <- relational
-        operator [T.pack "🙅"]
-        j <- relational
-        return (Equality Ne i j)
-      ) <|> relational
+equality =
+    (do
+            i <- relational
+            operator [T.pack "🙆"]
+            j <- relational
+            return (Equality Eq i j)
+        )
+        <|> (do
+                i <- relational
+                operator [T.pack "🙅"]
+                j <- relational
+                return (Equality Ne i j)
+            )
+        <|> relational
 
 relational :: Parser Expr
-relational = (do
-                i <- adds
-                operator [T.pack "↖️"]
-                j <- adds
-                return (Relational Gt i j)
-            ) <|> (do
+relational =
+    (do
+            i <- adds
+            operator [T.pack "↖️"]
+            j <- adds
+            return (Relational Gt i j)
+        )
+        <|> (do
                 i <- adds
                 operator [T.pack "↖️", T.pack "⬅️"]
                 j <- adds
                 return (Relational Ge i j)
-            ) <|> (do
+            )
+        <|> (do
                 i <- adds
                 operator [T.pack "↗️"]
                 j <- adds
                 return (Relational Lt i j)
-            ) <|> (do
+            )
+        <|> (do
                 i <- adds
                 operator [T.pack "➡️", T.pack "↗️"]
                 j <- adds
-                return (Relational Le i j)) <|> adds
+                return (Relational Le i j)
+            )
+        <|> adds
 
 adds :: Parser Expr
-adds = chainl1 operand op where
+adds = chainl1 operand op  where
     operand = muls
-    op = (do
-            operator [T.pack "➕"]
-            return (Binary Add)
-         ) <|> (do
-            operator [T.pack "➖"]
-            return (Binary Sub)
-         )
+    op =
+        (do
+                operator [T.pack "➕"]
+                return (Binary Add)
+            )
+            <|> (do
+                    operator [T.pack "➖"]
+                    return (Binary Sub)
+                )
 
 muls :: Parser Expr
-muls = chainl1 operand op where
+muls = chainl1 operand op  where
     operand = unary
-    op = (do
-            operator [T.pack "✖️"]
-            return (Binary Mult)
-         ) <|> (do
-             operator [T.pack "➗"]
-             return (Binary Div)
-         )
+    op =
+        (do
+                operator [T.pack "✖️"]
+                return (Binary Mult)
+            )
+            <|> (do
+                    operator [T.pack "➗"]
+                    return (Binary Div)
+                )
 
 unary :: Parser Expr
-unary = (do
+unary =
+    (do
             operator [T.pack "➖"]
             i <- unary
-            return (Unary Neg i))
+            return (Unary Neg i)
+        )
         <|> atom
 
 atom :: Parser Expr
-atom = literals
-            <|> (openParen *> expr <* closeParen)
+atom = literals <|> (openParen *> expr <* closeParen)
 
 literals :: Parser Expr
-literals = fmap Integer natural
-                <|> fmap Boolean boolean
-                <|> list
+literals = fmap Integer natural <|> fmap Boolean boolean <|> list
 
 list :: Parser Expr
-list = (openBracket 
-            *> fmap List 
-                (listL literals (operator [(T.pack "🖋️")]))
-            <* closeBracket
-       ) <|> (do
-            openBracket
-            closeBracket
-            return (List []))
+list =
+    (  openBracket
+        *> fmap List (listL literals (operator [(T.pack "🖋️")]))
+        <* closeBracket
+        )
+        <|> (do
+                openBracket
+                closeBracket
+                return (List [])
+            )
