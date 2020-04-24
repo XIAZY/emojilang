@@ -50,3 +50,6 @@ read = foldl addup 0  where
     getInt e = case (getDigit e) of
         (Just d ) -> toInteger d
         Nothing -> error "non-digit emoji meet"
+
+isOperator :: Text.Text -> Bool
+isOperator c = c `elem` (getEmoji "➕➖✖️➗🙆🙅↖️⬅️➡️↗️📦🔥🖋️")

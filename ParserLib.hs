@@ -151,8 +151,7 @@ natural =
 
 -- | Read something that looks like an operator, then skip trailing spaces.
 anyOperator :: Parser [T.Text]
-anyOperator = some (satisfy symChar) <* whitespaces
-  where symChar c = c `elem` (EmojiUtils.getEmoji "➕➖✖️➗🙆🙅↖️⬅️➡️↗️📦🔥🖋️")
+anyOperator = some (satisfy EmojiUtils.isOperator) <* whitespaces
 
 -- | Read the wanted operator, then skip trailing spaces.
 operator :: [T.Text] -> Parser [T.Text]
