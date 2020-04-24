@@ -99,8 +99,15 @@ atom = literals
 
 literals :: Parser Expr
 literals = fmap LitInt natural
-                <|> (openBracket *> list <* closeBracket)
                 <|> fmap Boolean boolean
-                
+                <|> list
+
 list :: Parser Expr
-list = fmap List (listL atom (operator [(T.pack "🖋️")]))
+list = (openBracket 
+            *> fmap List 
+                (listL literals (operator [(T.pack "🖋️")]))
+            <* closeBracket
+       ) <|> (do
+            openBracket
+            closeBracket
+            return (List []))
