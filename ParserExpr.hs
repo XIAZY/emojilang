@@ -94,6 +94,13 @@ unary = (do
         <|> atom
 
 atom :: Parser Expr
-atom = fmap LitInt natural
-            <|> fmap Boolean boolean
+atom = literals
             <|> (openParen *> expr <* closeParen)
+
+literals :: Parser Expr
+literals = fmap LitInt natural
+                <|> (openBracket *> list <* closeBracket)
+                <|> fmap Boolean boolean
+                
+list :: Parser Expr
+list = fmap List (listL atom (operator [(T.pack "🖋️")]))

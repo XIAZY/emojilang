@@ -1,5 +1,5 @@
 -- copyright notice
--- code here are modified from Prof Albert Lai's code at the University of Toronto
+-- code here is hugely inspired and modified from Prof Albert Lai's code at the University of Toronto
 
 module ParserLib where
 
@@ -9,6 +9,8 @@ import Data.Functor
 import Data.List
 import qualified Data.Text as T
 import EmojiUtils
+
+import ExprDef
 
 data Parser a = MkParser ([T.Text] -> Maybe ([T.Text], a))
 
@@ -154,7 +156,7 @@ natural = fmap EmojiUtils.read (some (satisfy EmojiUtils.isDigit)) <* whitespace
 anyOperator :: Parser [T.Text]
 anyOperator = some (satisfy symChar) <* whitespaces
   where
-    symChar c = c `elem` (EmojiUtils.getEmoji "➕➖✖️➗🙆🙅↖️⬅️➡️↗️📦🔥")
+    symChar c = c `elem` (EmojiUtils.getEmoji "➕➖✖️➗🙆🙅↖️⬅️➡️↗️📦🔥🖋️")
 
 -- | Read the wanted operator, then skip trailing spaces.
 operator :: [T.Text] -> Parser [T.Text]
@@ -167,6 +169,15 @@ openParen, closeParen :: Parser T.Text
 openParen = (char (T.pack "👉")) <* whitespaces
 closeParen = (char (T.pack "👈")) <* whitespaces
 
+openBracket, closeBracket :: Parser T.Text
+openBracket = (char (T.pack "🤜")) <* whitespaces
+closeBracket = (char (T.pack "🤛")) <* whitespaces
+
 boolean :: Parser Bool
 boolean = satisfy isBoolean
           >>= \c -> if c == (T.pack "👍") then return True else return False
+
+listL :: Parser a -> Parser b -> Parser [a]
+listL getArg getOp = liftA2 (:)
+          getArg
+          (many (getOp *> getArg))

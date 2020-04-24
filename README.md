@@ -22,14 +22,17 @@ Programming language using solely emoji
 <adds> ::= <muls>
          | <adds> "➕" <muls>
          | <adds> "➖" <muls>
-<muls> ::= <atom>
-         | <muls> "✖️" <atom> 
-         | <muls> "➗" <atom>
-<atom> ::= <bool> 
-         | <digit> 
-         | "👉" <expr> "👈">
+<muls> ::= <atoms>
+         | <muls> "✖️" <atoms> 
+         | <muls> "➗" <atoms>
+<atoms> ::= <literals> 
+          | "👉" <expr> "👈">
+<literals> ::= <digits>
+             | <bool>
+             | <list>
 <bool> ::= "👍" | "👎"
-<digit> ::= "0️⃣"|"1️⃣"|"2️⃣"|"3️⃣"|"4️⃣"|"5️⃣"|"6️⃣"|"7️⃣"|"8️⃣"|"9️⃣"
+<digits> ::= "0️⃣"|"1️⃣"|"2️⃣"|"3️⃣"|"4️⃣"|"5️⃣"|"6️⃣"|"7️⃣"|"8️⃣"|"9️⃣"
+<list> ::= "🤜" <literals> {"🖋️"<literals>} "🤛"
 ```
 
 # Current state
