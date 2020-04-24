@@ -38,14 +38,12 @@ equality =
     (do
             i <- relational
             operator [T.pack "🙆"]
-            j <- relational
-            return (Equality Eq i j)
+            Equality Eq i <$> relational
         )
         <|> (do
                 i <- relational
                 operator [T.pack "🙅"]
-                j <- relational
-                return (Equality Ne i j)
+                Equality Ne i <$> relational
             )
         <|> relational
 
@@ -54,26 +52,22 @@ relational =
     (do
             i <- adds
             operator [T.pack "↖️"]
-            j <- adds
-            return (Relational Gt i j)
+            Relational Gt i <$> adds
         )
         <|> (do
                 i <- adds
                 operator [T.pack "↖️", T.pack "⬅️"]
-                j <- adds
-                return (Relational Ge i j)
+                Relational Ge i <$> adds
             )
         <|> (do
                 i <- adds
                 operator [T.pack "↗️"]
-                j <- adds
-                return (Relational Lt i j)
+                Relational Lt i <$> adds
             )
         <|> (do
                 i <- adds
                 operator [T.pack "➡️", T.pack "↗️"]
-                j <- adds
-                return (Relational Le i j)
+                Relational Le i <$> adds
             )
         <|> adds
 
@@ -107,8 +101,7 @@ unary :: Parser Expr
 unary =
     (do
             operator [T.pack "➖"]
-            i <- unary
-            return (Unary Neg i)
+            Unary Neg <$> unary
         )
         <|> atom
 

@@ -19,7 +19,7 @@ runStringParser :: Parser a -> String -> Maybe a
 runStringParser p inputString = runParser p (EmojiUtils.getEmoji inputString)
 
 runParser :: Parser a -> [T.Text] -> Maybe a
-runParser (MkParser sf) input = fmap (\(_, a) -> a) (sf input)
+runParser (MkParser sf) input = fmap snd (sf input)
 
 instance Functor Parser where
     -- fmap :: (a -> b) -> Parser a -> Parser b
@@ -141,7 +141,7 @@ chainl1
   -> Parser (a -> a -> a)   -- ^ operator parser
   -> Parser a               -- ^ whole answer
 chainl1 getArg getOp = liftA2 link getArg (many (liftA2 (,) getOp getArg))
-  where link x opys = foldl (\accum (op, y) -> op accum y) x opys
+  where link = foldl (\accum (op, y) -> op accum y)
 
 -- token level primitives
 

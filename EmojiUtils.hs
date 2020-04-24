@@ -49,4 +49,4 @@ read = foldl addup 0  where
     addup ten oneE = (ten * 10 + (getInt oneE))
     getInt e = case (getDigit e) of
         (Just d ) -> toInteger d
-        (Nothing) -> error "non-digit emoji meet"
+        Nothing -> error "non-digit emoji meet"
