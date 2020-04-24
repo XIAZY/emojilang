@@ -42,6 +42,6 @@ Most of above syntax is already working, actively adding more syntax for real wo
 
 Quick Demo
 ```
-*ParserExpr> runStringParser mainParser "1️⃣1️⃣4️⃣5️⃣1️⃣4️⃣↖️⬅️👉5️⃣➕4️⃣4️⃣➗7️⃣👈🙅👍"
-Just (Equality Ne (Relational Ge (LitInt 114514) (Binary Add (LitInt 5) (Binary Div (LitInt 44) (LitInt 7)))) (Boolean True))
+*ParserExpr> runStringParser mainParser "1️⃣1️⃣4️⃣5️⃣1️⃣4️⃣↖️⬅️👉5️⃣➕4️⃣4️⃣➗7️⃣👈🙅🤜👍🖋️🤜🤛🤛"
+Just (Equality Ne (Relational Ge (LitInt 114514) (Binary Add (LitInt 5) (Binary Div (LitInt 44) (LitInt 7)))) (List [Boolean True,List []]))
 ```
