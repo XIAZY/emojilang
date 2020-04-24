@@ -1,6 +1,6 @@
 module ExprDef where
 
-data Expr = LitInt Integer
+data Expr = Integer Integer
           | Binary BinaryOp Expr Expr
           | Unary UnaryOp Expr
           | Equality EqOp Expr Expr

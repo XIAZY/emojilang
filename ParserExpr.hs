@@ -98,7 +98,7 @@ atom = literals
             <|> (openParen *> expr <* closeParen)
 
 literals :: Parser Expr
-literals = fmap LitInt natural
+literals = fmap Integer natural
                 <|> fmap Boolean boolean
                 <|> list
 

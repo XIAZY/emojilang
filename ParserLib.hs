@@ -10,8 +10,6 @@ import Data.List
 import qualified Data.Text as T
 import EmojiUtils
 
-import ExprDef
-
 data Parser a = MkParser ([T.Text] -> Maybe ([T.Text], a))
 
 unParser :: Parser a -> [T.Text] -> Maybe ([T.Text], a)
