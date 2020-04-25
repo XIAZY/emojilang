@@ -18,20 +18,16 @@ conditional = logicalOr
 logicalOr :: Parser Expr
 logicalOr = chainl1 operand op  where
     operand = logicalAnd
-    op =
-        (do
-            operator [T.pack "🔥"]
-            return (Conditional LogicalOr)
-        )
+    op      = do
+        operator [T.pack "🔥"]
+        return (Conditional LogicalOr)
 
 logicalAnd :: Parser Expr
 logicalAnd = chainl1 operand op  where
     operand = equality
-    op =
-        (do
-            operator [T.pack "📦"]
-            return (Conditional LogicalAnd)
-        )
+    op      = do
+        operator [T.pack "📦"]
+        return (Conditional LogicalAnd)
 
 equality :: Parser Expr
 equality =
@@ -109,8 +105,7 @@ atom :: Parser Expr
 atom = literals <|> (openParen *> expr <* closeParen)
 
 literals :: Parser Expr
-literals = fmap Integer natural <|> fmap Boolean boolean <|> list
- <|> fmap
+literals = fmap Integer natural <|> fmap Boolean boolean <|> list <|> fmap
     Identifier
     (identifier [])
 

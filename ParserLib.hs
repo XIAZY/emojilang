@@ -57,7 +57,7 @@ instance Monad Parser where
 
 instance Alternative Parser where
     -- empty :: Parser a
-  empty = MkParser (\_ -> Nothing)
+  empty = MkParser (const Nothing)
 
   -- (<|>) :: Parser a -> Parser a -> Parser a
   MkParser sf1 <|> p2 = MkParser g
@@ -113,7 +113,7 @@ eof = MkParser sf
 
 -- | Space or tab or newline (unix and windows).
 whitespace :: Parser T.Text
-whitespace = satisfy (\c -> c `elem` ws)
+whitespace = satisfy (`elem` ws)
   where ws = Prelude.map T.pack ["\t", "\n", "\r", " "]
 
 -- -- | Consume zero or more whitespaces, maximum munch.
