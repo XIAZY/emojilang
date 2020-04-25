@@ -5,6 +5,10 @@ Programming language using solely emoji
 
 ## EBNF (as for now)
 ```
+<stmt> ::= <simple_stmt>>
+<simple_stmt> ::= <expr_stmt>
+<expr_stmt> ::= {<expr> "😎"}
+
 <expr> ::= <conditional>
 <assignment> ::= <conditional>
                | <identifier> "🤏" <conditional>
@@ -47,6 +51,6 @@ Most of above syntax is already working, actively adding more syntax for real wo
 
 Quick Demo
 ```
-*ParserExpr> runStringParser mainParser "😀🤏1️⃣1️⃣4️⃣5️⃣1️⃣4️⃣↖️⬅️👉5️⃣➕4️⃣4️⃣➗7️⃣👈🙅🤜👍🖋️🤜🤛🖋️😀🤛"
-Just (Assignment (Identifier ["\128512"]) (Equality Ne (Relational Ge (Integer 114514) (Binary Add (Integer 5) (Binary Div (Integer 44) (Integer 7)))) (List [Boolean True,List [],Identifier ["\128512"]])))
+*StmtParser> runStringParser stmt "😀🤏1️⃣1️⃣4️⃣5️⃣1️⃣4️⃣😎😀↖️⬅️👉5️⃣➕4️⃣4️⃣➗7️⃣👈🙅🤜👍🖋️🤜🤛🖋️😀🤛"
+Just (ExprStmt [Assignment (Identifier ["\128512"]) (Integer 114514),Equality Ne (Relational Ge (Identifier ["\128512"]) (Binary Add (Integer 5) (Binary Div (Integer 44) (Integer 7)))) (List [Boolean True,List [],Identifier ["\128512"]])])
 ```

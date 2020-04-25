@@ -6,9 +6,6 @@ import           ParserLib
 import           Control.Applicative
 import qualified Data.Text                     as T
 
-mainParser :: Parser Expr
-mainParser = whitespaces *> expr <* eof
-
 expr :: Parser Expr
 expr = assignment
 
