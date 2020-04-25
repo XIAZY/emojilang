@@ -1,7 +1,7 @@
 # emojilang
 抽象话编程语言
 
-Programming language using solely emoji
+~~Toy~~ Programming language using solely emoji
 
 ## EBNF (as for now)
 ```
@@ -47,7 +47,7 @@ Programming language using solely emoji
 # Current state
 Implementing parser to generate syntax tree.
 
-Most of above syntax is already working, actively adding more syntax for real world uses.
+Most of the above syntax is already working, actively adding more syntax for real world uses.
 
 Quick Demo
 ```
