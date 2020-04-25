@@ -6,6 +6,8 @@ Programming language using solely emoji
 ## EBNF (as for now)
 ```
 <expr> ::= <conditional>
+<assignment> ::= <conditional>
+               | <identifier> "🤏" <conditional>
 <conditional> ::= <or>
 <or> ::= <and> 
        | <or> "🔥" <and>
@@ -25,6 +27,8 @@ Programming language using solely emoji
 <muls> ::= <atoms>
          | <muls> "✖️" <atoms> 
          | <muls> "➗" <atoms>
+<unary> ::= <atoms>
+          | "➖" <atoms>
 <atoms> ::= <literals> 
           | "👉" <expr> "👈">
 <literals> ::= <digits>

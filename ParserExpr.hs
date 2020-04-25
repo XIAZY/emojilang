@@ -10,7 +10,13 @@ mainParser :: Parser Expr
 mainParser = whitespaces *> expr <* eof
 
 expr :: Parser Expr
-expr = conditional
+expr = assignment
+
+assignment :: Parser Expr
+assignment = (do
+    k <- identifiers
+    operator [T.pack "🤏"]
+    Assignment k <$> conditional) <|> conditional
 
 conditional :: Parser Expr
 conditional = logicalOr
@@ -105,9 +111,12 @@ atom :: Parser Expr
 atom = literals <|> (openParen *> expr <* closeParen)
 
 literals :: Parser Expr
-literals = fmap Integer natural <|> fmap Boolean boolean <|> list <|> fmap
+literals = fmap Integer natural <|> fmap Boolean boolean <|> list <|> identifiers
+
+identifiers :: Parser Expr
+identifiers = fmap
     Identifier
-    (identifier [])
+    (ParserLib.identifier [])
 
 list :: Parser Expr
 list =

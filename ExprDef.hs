@@ -11,6 +11,7 @@ data Expr = Integer Integer
           | Boolean Bool
           | List [Expr]
           | Identifier [T.Text]
+          | Assignment Expr Expr
     deriving (Eq, Show)
 
 data BinaryOp = Add | Sub | Mult | Div
