@@ -1,5 +1,5 @@
 -- copyright notice
--- code here is hugely inspired and modified from Prof Albert Lai's code at the University of Toronto
+-- code here is heavily inspired and modified from Prof Albert Lai's code at the University of Toronto
 
 module ParserLib where
 
@@ -160,16 +160,24 @@ operator wanted =
 
 -- | Open and close parentheses.
 openParen, closeParen :: Parser T.Text
-openParen = (char (T.pack "👉")) <* whitespaces
-closeParen = (char (T.pack "👈")) <* whitespaces
+openParen = char (T.pack "👉") <* whitespaces
+closeParen = char (T.pack "👈") <* whitespaces
 
 openBracket, closeBracket :: Parser T.Text
-openBracket = (char (T.pack "🤜")) <* whitespaces
-closeBracket = (char (T.pack "🤛")) <* whitespaces
+openBracket = char (T.pack "🤜") <* whitespaces
+closeBracket = char (T.pack "🤛") <* whitespaces
 
 boolean :: Parser Bool
 boolean = satisfy isBoolean
-  >>= \c -> if c == (T.pack "👍") then return True else return False
+  >>= \c -> if c == T.pack "👍" then return True else return False
 
 listL :: Parser a -> Parser b -> Parser [a]
 listL getArg getOp = liftA2 (:) getArg (many (getOp *> getArg))
+
+identifier :: [[T.Text]] -> Parser [T.Text]
+identifier keywords =
+  satisfy (\c -> not (EmojiUtils.isReserved c || EmojiUtils.isDigit c))
+    >>= \c -> many (satisfy (not . EmojiUtils.isReserved)) >>= \cs ->
+          whitespaces
+            >> let str = c : cs
+               in  if str `elem` keywords then empty else return str

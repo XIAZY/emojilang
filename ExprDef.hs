@@ -1,5 +1,7 @@
 module ExprDef where
 
+import qualified Data.Text                     as T
+
 data Expr = Integer Integer
           | Binary BinaryOp Expr Expr
           | Unary UnaryOp Expr
@@ -8,6 +10,7 @@ data Expr = Integer Integer
           | Conditional LogicalOp Expr Expr
           | Boolean Bool
           | List [Expr]
+          | Identifier [T.Text]
     deriving (Eq, Show)
 
 data BinaryOp = Add | Sub | Mult | Div

@@ -109,9 +109,10 @@ atom :: Parser Expr
 atom = literals <|> (openParen *> expr <* closeParen)
 
 literals :: Parser Expr
-literals = fmap Integer natural 
-            <|> fmap Boolean boolean 
-            <|> list
+literals = fmap Integer natural <|> fmap Boolean boolean <|> list
+ <|> fmap
+    Identifier
+    (identifier [])
 
 list :: Parser Expr
 list =
