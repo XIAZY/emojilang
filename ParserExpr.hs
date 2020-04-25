@@ -112,7 +112,7 @@ literals = fmap Integer natural <|> fmap Boolean boolean <|> list <|> fmap
 list :: Parser Expr
 list =
     (  openBracket
-        *> fmap List (listL literals (operator [(T.pack "🖋️")]))
+        *> fmap List (listL literals (operator [T.pack "🖋️"]))
         <* closeBracket
         )
         <|> (do
