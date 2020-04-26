@@ -17,7 +17,7 @@ Emojilang solves this problem! No matter what language you speak, we all use sam
 <compound_stmt> ::= <if>
 <if> ::= "🤔" <conditional> "⏬" <stmt> "⏫"
        | <conditional> "🐴" "⏬" <stmt> "⏫"
-       // these two are absolute the same. just here for internationalization!
+       // these two are absolutely the same. just here for internationalization!
 
 <expr> ::= <assignment>
 <assignment> ::= <conditional>
