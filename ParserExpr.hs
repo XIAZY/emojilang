@@ -12,7 +12,7 @@ expr = assignment
 assignment :: Parser Expr
 assignment = (do
     k <- identifiers
-    operator [T.pack "🤏"]
+    charToken (T.pack "🤏")
     Assignment k <$> conditional) <|> conditional
 
 conditional :: Parser Expr
@@ -22,26 +22,26 @@ logicalOr :: Parser Expr
 logicalOr = chainl1 operand op  where
     operand = logicalAnd
     op      = do
-        operator [T.pack "🔥"]
+        charToken (T.pack "🔥")
         return (Conditional LogicalOr)
 
 logicalAnd :: Parser Expr
 logicalAnd = chainl1 operand op  where
     operand = equality
     op      = do
-        operator [T.pack "📦"]
+        charToken (T.pack "📦")
         return (Conditional LogicalAnd)
 
 equality :: Parser Expr
 equality =
     (do
             i <- relational
-            operator [T.pack "🙆"]
+            charToken (T.pack "🙆")
             Equality Eq i <$> relational
         )
         <|> (do
                 i <- relational
-                operator [T.pack "🙅"]
+                charToken (T.pack "🙅")
                 Equality Ne i <$> relational
             )
         <|> relational
@@ -118,7 +118,7 @@ identifiers = fmap
 lists :: Parser Expr
 lists =
     (  openBracket
-        *> fmap List (ParserLib.list literals (operator [T.pack "🖋️"]))
+        *> fmap List (ParserLib.list literals (charToken (T.pack "🖋️")))
         <* closeBracket
         )
         <|> (do

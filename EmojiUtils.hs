@@ -52,7 +52,7 @@ read = foldl addup 0  where
         Nothing  -> error "non-digit emoji meet"
 
 isOperator :: Text.Text -> Bool
-isOperator c = c `elem` getEmoji "➕➖✖️➗🙆🙅↖️⬅️➡️↗️📦🔥🖋️🤏😎"
+isOperator c = c `elem` getEmoji "➕➖✖️➗↖️⬅️➡️↗️"
 
 isReserved :: Text.Text -> Bool
-isReserved c = isOperator c || c `elem` getEmoji "🤜🤛👉👈⏬⏫"
+isReserved c = isOperator c || c `elem` getEmoji "🤜🤛👉👈⏬⏫📦🔥🖋️🤏🙆🙅😎"
