@@ -21,7 +21,7 @@ Emojilang solves this problem! No matter what language you speak, we all use sam
 
 <expr> ::= <assignment>
 <assignment> ::= <conditional>
-               | <identifier> "🤏" <conditional>
+               | <identifier> "️🖊️" <conditional>
 <conditional> ::= <or>
 <or> ::= <and> 
        | <or> "🔥" <and>
@@ -51,7 +51,7 @@ Emojilang solves this problem! No matter what language you speak, we all use sam
              | <identifier>
 <bool> ::= "👍" | "👎"
 <digits> ::= "0️⃣"|"1️⃣"|"2️⃣"|"3️⃣"|"4️⃣"|"5️⃣"|"6️⃣"|"7️⃣"|"8️⃣"|"9️⃣"
-<list> ::= "🤜" [<literals> {"🖋️"<literals>}] "🤛" // yes it takes empty and nested list
+<list> ::= "🤜" [<literals> {"🔨"<literals>}] "🤛" // yes it takes empty and nested list
 ```
 
 # Current state
@@ -61,6 +61,6 @@ Most of the above syntax is already working, actively adding more syntax for rea
 
 Quick Demo
 ```
-*StmtParser> runStringParser stmt "👉0️⃣🙆😀👈🐴⏬😀🤏1️⃣1️⃣4️⃣5️⃣1️⃣4️⃣😎😀↖️⬅️👉5️⃣➕4️⃣4️⃣➗7️⃣👈🙅🤜👍🖋️🤜🤛🖋️😀🤛😎⏫"
+*StmtParser> runStringParser stmt "👉0️⃣🙆😀👈🐴⏬😀🖊️1️⃣1️⃣4️⃣5️⃣1️⃣4️⃣😎😀↖️⬅️👉5️⃣➕4️⃣4️⃣➗7️⃣👈🙅🤜👍🔨🤜🤛🔨😀🤛😎⏫"
 Just (If (Equality Eq (Integer 0) (Identifier ["\128512"])) (ExprStmt [Assignment (Identifier ["\128512"]) (Integer 114514),Equality Ne (Relational Ge (Identifier ["\128512"]) (Binary Add (Integer 5) (Binary Div (Integer 44) (Integer 7)))) (List [Boolean True,List [],Identifier ["\128512"]])]))
 ```

@@ -12,7 +12,7 @@ expr = assignment
 assignment :: Parser Expr
 assignment = (do
     k <- identifiers
-    charToken (T.pack "🤏")
+    charToken (T.pack "🖊️")
     Assignment k <$> conditional) <|> conditional
 
 conditional :: Parser Expr
@@ -118,7 +118,7 @@ identifiers = fmap
 lists :: Parser Expr
 lists =
     (  openBracket
-        *> fmap List (ParserLib.list literals (charToken (T.pack "🖋️")))
+        *> fmap List (ParserLib.list literals (charToken (T.pack "🔨")))
         <* closeBracket
         )
         <|> (do
