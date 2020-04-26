@@ -11,11 +11,15 @@ Emojilang solves this problem! No matter what language you speak, we all use sam
 
 ## EBNF (as for now)
 ```
-<stmt> ::= <simple_stmt>>
+<stmt> ::= <simple_stmt> | <compound_stmt>
 <simple_stmt> ::= <expr_stmt>
 <expr_stmt> ::= {<expr> "😎"}
+<compound_stmt> ::= <if>
+<if> ::= "🤔" <conditional> "⏬" <stmt> "⏫"
+       | <conditional> "🐴" "⏬" <stmt> "⏫"
+       // these two are absolute the same. just here for internationalization!
 
-<expr> ::= <conditional>
+<expr> ::= <assignment>
 <assignment> ::= <conditional>
                | <identifier> "🤏" <conditional>
 <conditional> ::= <or>
@@ -57,6 +61,6 @@ Most of the above syntax is already working, actively adding more syntax for rea
 
 Quick Demo
 ```
-*StmtParser> runStringParser stmt "😀🤏1️⃣1️⃣4️⃣5️⃣1️⃣4️⃣😎😀↖️⬅️👉5️⃣➕4️⃣4️⃣➗7️⃣👈🙅🤜👍🖋️🤜🤛🖋️😀🤛"
-Just (ExprStmt [Assignment (Identifier ["\128512"]) (Integer 114514),Equality Ne (Relational Ge (Identifier ["\128512"]) (Binary Add (Integer 5) (Binary Div (Integer 44) (Integer 7)))) (List [Boolean True,List [],Identifier ["\128512"]])])
+*StmtParser> runStringParser stmt "👉0️⃣🙆😀👈🐴⏬😀🤏1️⃣1️⃣4️⃣5️⃣1️⃣4️⃣😎😀↖️⬅️👉5️⃣➕4️⃣4️⃣➗7️⃣👈🙅🤜👍🖋️🤜🤛🖋️😀🤛😎⏫"
+Just (If (Equality Eq (Integer 0) (Identifier ["\128512"])) (ExprStmt [Assignment (Identifier ["\128512"]) (Integer 114514),Equality Ne (Relational Ge (Identifier ["\128512"]) (Binary Add (Integer 5) (Binary Div (Integer 44) (Integer 7)))) (List [Boolean True,List [],Identifier ["\128512"]])]))
 ```

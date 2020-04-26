@@ -167,12 +167,19 @@ openBracket, closeBracket :: Parser T.Text
 openBracket = char (T.pack "🤜") <* whitespaces
 closeBracket = char (T.pack "🤛") <* whitespaces
 
+openBlock, closeBlock :: Parser T.Text
+openBlock = char (T.pack "⏬") <* whitespaces
+closeBlock = char (T.pack "⏫") <* whitespaces
+
 boolean :: Parser Bool
 boolean = satisfy isBoolean
   >>= \c -> if c == T.pack "👍" then return True else return False
 
-listL :: Parser a -> Parser b -> Parser [a]
-listL getArg getOp = liftA2 (:) getArg (many (getOp *> getArg))
+list :: Parser a -> Parser b -> Parser [a]
+list getArg getOp = liftA2 (:) getArg (many (getOp *> getArg))
+
+statements :: Parser a -> Parser b -> Parser [a]
+statements getArg getOp = some(getArg <* getOp)
 
 identifier :: [[T.Text]] -> Parser [T.Text]
 identifier keywords =
@@ -181,3 +188,6 @@ identifier keywords =
           whitespaces
             >> let str = c : cs
                in  if str `elem` keywords then empty else return str
+
+charToken :: T.Text -> Parser T.Text
+charToken c = char c <* whitespaces

@@ -55,4 +55,4 @@ isOperator :: Text.Text -> Bool
 isOperator c = c `elem` getEmoji "➕➖✖️➗🙆🙅↖️⬅️➡️↗️📦🔥🖋️🤏😎"
 
 isReserved :: Text.Text -> Bool
-isReserved c = isOperator c || c `elem` getEmoji "🤜🤛👉👈"
+isReserved c = isOperator c || c `elem` getEmoji "🤜🤛👉👈⏬⏫"

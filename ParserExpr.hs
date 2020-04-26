@@ -108,17 +108,17 @@ atom :: Parser Expr
 atom = literals <|> (openParen *> expr <* closeParen)
 
 literals :: Parser Expr
-literals = fmap Integer natural <|> fmap Boolean boolean <|> list <|> identifiers
+literals = fmap Integer natural <|> fmap Boolean boolean <|> lists <|> identifiers
 
 identifiers :: Parser Expr
 identifiers = fmap
     Identifier
     (ParserLib.identifier [])
 
-list :: Parser Expr
-list =
+lists :: Parser Expr
+lists =
     (  openBracket
-        *> fmap List (listL literals (operator [T.pack "🖋️"]))
+        *> fmap List (ParserLib.list literals (operator [T.pack "🖋️"]))
         <* closeBracket
         )
         <|> (do
