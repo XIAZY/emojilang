@@ -5,7 +5,7 @@ Short version:
 ~~Toy~~ Programming language using solely emoji
 
 Long version:
-Most programming languages use English keywords. While it is true that English is the de-facto international language, it is extra burden to programmers who don't speak English well.
+Most programming languages use English keywords. While it is true that English is the de-facto international language, it is an extra burden to programmers who don't speak English well.
 
 Emojilang solves this problem! No matter what language you speak, we all use same Emoji to express ourselves. Everyone can code in Emojilang, even illiterate ones!
 
