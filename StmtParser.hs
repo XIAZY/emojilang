@@ -19,19 +19,32 @@ compound = ifStmt
 
 ifStmt :: Parser Stmt
 ifStmt =
+    (ifs >>= \i@(If c s _) -> elses >>= \e -> return (If c s (Just e))) <|> ifs
+
+ifs :: Parser Stmt
+ifs =
     (do
             charToken (T.pack "🤔")
-            e <- PE.conditional
+            c <- PE.conditional
             openBlock
             s <- stmt
             closeBlock
-            return (If e s)
+            return (If c s Nothing)
         )
         <|> (do
-                e <- PE.conditional
+                c <- PE.conditional
                 charToken (T.pack "🐴")
                 openBlock
                 s <- stmt
                 closeBlock
-                return (If e s)
+                return (If c s Nothing)
             )
+
+elses :: Parser Stmt
+elses =
+    do
+        charToken (T.pack "😱")
+        openBlock
+        e <- stmt
+        closeBlock
+        return e
