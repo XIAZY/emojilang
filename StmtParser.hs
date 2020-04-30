@@ -15,7 +15,7 @@ simple :: Parser Stmt
 simple = fmap ExprStmt (statements PE.expr (charToken (T.pack "😎")))
 
 compound :: Parser Stmt
-compound = ifStmt
+compound = ifStmt <|> whileStmt
 
 ifStmt :: Parser Stmt
 ifStmt =
@@ -48,3 +48,12 @@ elses =
         e <- stmt
         closeBlock
         return e
+
+whileStmt :: Parser Stmt
+whileStmt = do
+            charToken (T.pack "🔁")
+            c <- PE.conditional
+            openBlock
+            s <- stmt
+            closeBlock
+            return (While c s)
