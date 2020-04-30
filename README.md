@@ -51,6 +51,7 @@ Emojilang solves this problem! No matter what language you speak, we all use sam
              | <bool>
              | <list>
              | <identifier>
+             | "🔤" <string> "🔤"
 <bool> ::= "👍" | "👎"
 <digits> ::= "0️⃣"|"1️⃣"|"2️⃣"|"3️⃣"|"4️⃣"|"5️⃣"|"6️⃣"|"7️⃣"|"8️⃣"|"9️⃣"
 <list> ::= "🤜" [<literals> {"🔨"<literals>}] "🤛" // yes it takes empty and nested list

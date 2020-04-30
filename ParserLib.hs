@@ -188,3 +188,8 @@ identifier keywords =
 
 charToken :: T.Text -> Parser T.Text
 charToken c = char c <* whitespaces
+
+string :: Parser [T.Text]
+string = many readString <* whitespaces
+  where
+    readString = satisfy (not . \c -> c `elem` EmojiUtils.stringSymbol )

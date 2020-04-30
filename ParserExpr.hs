@@ -108,7 +108,7 @@ atom :: Parser Expr
 atom = literals <|> (openParen *> expr <* closeParen)
 
 literals :: Parser Expr
-literals = fmap Integer natural <|> fmap Boolean boolean <|> lists <|> identifiers
+literals = fmap Integer natural <|> fmap Boolean boolean <|> lists <|> identifiers <|> strings
 
 identifiers :: Parser Expr
 identifiers = fmap
@@ -126,3 +126,10 @@ lists =
                 closeBracket
                 return (List [])
             )
+
+strings :: Parser Expr
+strings = do
+            charToken (T.pack "🔠")
+            s <- ParserLib.string
+            charToken (T.pack "🔡")
+            return (String s)
