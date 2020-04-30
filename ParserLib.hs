@@ -178,9 +178,6 @@ boolean = satisfy isBoolean
 list :: Parser a -> Parser b -> Parser [a]
 list getArg getOp = liftA2 (:) getArg (many (getOp *> getArg))
 
-statements :: Parser a -> Parser b -> Parser [a]
-statements getArg getOp = some(getArg <* getOp)
-
 identifier :: [[T.Text]] -> Parser [T.Text]
 identifier keywords =
   satisfy (\c -> not (EmojiUtils.isReserved c || EmojiUtils.isDigit c))

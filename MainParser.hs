@@ -5,4 +5,4 @@ import qualified StmtDef as SD
 import ParserLib
 
 mainParser :: Parser SD.Stmt
-mainParser = whitespaces *> SP.stmt <* eof
+mainParser = whitespaces *> SP.stmts <* eof

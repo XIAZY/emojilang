@@ -14,11 +14,12 @@ Emojilang solves this problem! No matter what language you speak, we all use sam
 <stmt> ::= <simple_stmt> | <compound_stmt>
 <simple_stmt> ::= <expr_stmt>
 <expr_stmt> ::= {<expr> "😎"}
-<compound_stmt> ::= <if> | <while>
+<compound_stmt> ::= <if> | <while> | <func>
 <if> ::= "🤔" <conditional> "⏬" <stmt> "⏫" ["😱" "⏬" <stmt> "⏫"]
        | <conditional> "🐴" "⏬" <stmt> "⏫" ["😱" "⏬" <stmt> "⏫"]
        // these two are absolutely the same. just here for internationalization!
 <while> ::= "🔁" <conditional> "⏬" <stmt> "⏫"
+<func> ::= "🔣" <identifier> "⏬" <stmt> "⏫"
 
 <expr> ::= <assignment>
 <assignment> ::= <conditional>
@@ -62,6 +63,6 @@ Most of the above syntax is already working, actively adding more syntax for rea
 
 Quick Demo
 ```
-*MainParser> runStringParser mainParser "🤔👉0️⃣🙆😀👈⏬😀🖊️1️⃣1️⃣4️⃣5️⃣1️⃣4️⃣😎😀↖️⬅️👉5️⃣➕4️⃣4️⃣➗7️⃣👈🙅🤜👍🔨🤜🤛🔨😀🤛😎⏫😱⏬🤔😄⏬🔁😄⏬😃😎⏫⏫😱⏬🤔😄⏬😃😎⏫⏫⏫"
-Just (If (Equality Eq (Integer 0) (Identifier ["\128512"])) (ExprStmt [Assignment (Identifier ["\128512"]) (Integer 114514),Equality Ne (Relational Ge (Identifier ["\128512"]) (Binary Add (Integer 5) (Binary Div (Integer 44) (Integer 7)))) (List [Boolean True,List [],Identifier ["\128512"]])]) (Just (If (Identifier ["\128516"]) (While (Identifier ["\128516"]) (ExprStmt [Identifier ["\128515"]])) (Just (If (Identifier ["\128516"]) (ExprStmt [Identifier ["\128515"]]) Nothing)))))
+*MainParser> runStringParser mainParser "🔣🎅⏬🤔👉0️⃣🙆😀👈⏬😀🖊️1️⃣1️⃣4️⃣5️⃣1️⃣4️⃣😎😀↖️⬅️👉5️⃣➕4️⃣4️⃣➗7️⃣👈🙅🤜👍🔨🤜🤛🔨😀🤛😎⏫😱⏬🤔😄⏬🔁😄⏬😃😎⏫⏫😱⏬🤔😄⏬😃😎⏫⏫⏫⏫🎅😎"
+Just (Statements [Func (Identifier ["\127877"]) (Statements [If (Equality Eq (Integer 0) (Identifier ["\128512"])) (Statements [ExprStmt (Assignment (Identifier ["\128512"]) (Integer 114514)),ExprStmt (Equality Ne (Relational Ge (Identifier ["\128512"]) (Binary Add (Integer 5) (Binary Div (Integer 44) (Integer 7)))) (List [Boolean True,List [],Identifier ["\128512"]]))]) (Just (Statements [If (Identifier ["\128516"]) (Statements [While (Identifier ["\128516"]) (Statements [ExprStmt (Identifier ["\128515"])])]) (Just (Statements [If (Identifier ["\128516"]) (Statements [ExprStmt (Identifier ["\128515"])]) Nothing]))]))]),ExprStmt (Identifier ["\127877"])])
 ```
