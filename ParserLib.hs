@@ -191,5 +191,12 @@ charToken c = char c <* whitespaces
 
 string :: Parser [T.Text]
 string = many readString <* whitespaces
-  where
-    readString = satisfy (not . \c -> c `elem` EmojiUtils.stringSymbol )
+ where
+  readString =
+    escape (T.pack "📌") (not . \c -> c `elem` EmojiUtils.stringSymbol)
+
+escape :: T.Text -> (T.Text -> Bool) -> Parser T.Text
+escape echar pred = MkParser sf where
+  sf (c1 : c2 : cs) | c1 == echar = Just (cs, c2)
+                    | pred c1     = Just (c2 : cs, c1)
+  sf _ = Nothing
