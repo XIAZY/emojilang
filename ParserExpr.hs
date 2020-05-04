@@ -99,7 +99,9 @@ muls = chainl1 operand op  where
 unary :: Parser Expr
 unary =
     (do
-            operator [T.pack "➖"]
+            charToken (T.pack "➖")
+            -- we dont use operator here b/c anyoperator reads anything that looks like an operator
+            -- imagine "➖➖", it wont be broken into two "➖"
             Unary Neg <$> unary
         )
         <|> atom
