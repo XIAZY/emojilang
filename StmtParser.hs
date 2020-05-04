@@ -66,7 +66,10 @@ funcStmt :: Parser Stmt
 funcStmt = do
     charToken (T.pack "🔣")
     c <- PE.identifiers
+    charToken (T.pack "👉")
+    p <- ParserLib.list PE.identifiers (charToken (T.pack "🔨"))
+    charToken (T.pack "👈")
     openBlock
     s <- stmts
     closeBlock
-    return (Func c s)
+    return (Func c p s)

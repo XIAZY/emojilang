@@ -19,7 +19,7 @@ Emojilang solves this problem! No matter what language you speak, we all use  th
        | <conditional> "🐴" "⏬" <stmt> "⏫" ["😱" "⏬" <stmt> "⏫"]
        // these two are absolutely the same. just here for internationalization!
 <while> ::= "🔁" <conditional> "⏬" <stmt> "⏫"
-<func> ::= "🔣" <identifier> "⏬" <stmt> "⏫"
+<func> ::= "🔣" <identifier> "👉"[<identifier> {"🔨" <identifier>}] "👈" "⏬" <stmt> "⏫"
 
 <expr> ::= <assignment>
 <assignment> ::= <conditional>
@@ -40,18 +40,19 @@ Emojilang solves this problem! No matter what language you speak, we all use  th
 <adds> ::= <muls>
          | <adds> "➕" <muls>
          | <adds> "➖" <muls>
-<muls> ::= <atoms>
-         | <muls> "✖️" <atoms> 
-         | <muls> "➗" <atoms>
-<unary> ::= <atoms>
-          | "➖" <atoms>
-<atoms> ::= <literals> 
-          | "👉" <expr> "👈">
-<literals> ::= <digits>
+<muls> ::= <unary>
+         | <muls> "✖️" <unary> 
+         | <muls> "➗" <unary>
+<unary> ::= <postfix>
+          | "➖" <unary>
+<postfix> ::= <atoms>
+            | <postfix> "👉" [<assignment> {"🔨"<assignment>}]  "👈"
+<atoms> ::= <digits>
              | <bool>
              | <list>
              | <identifier>
              | "🔤" <string> "🔤" // escape symbol is "📌"
+             | "👉" <expr> "👈"
 <bool> ::= "👍" | "👎"
 <digits> ::= "0️⃣"|"1️⃣"|"2️⃣"|"3️⃣"|"4️⃣"|"5️⃣"|"6️⃣"|"7️⃣"|"8️⃣"|"9️⃣"
 <list> ::= "🤜" [<literals> {"🔨"<literals>}] "🤛" // yes it takes empty and nested list
