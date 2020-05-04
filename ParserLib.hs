@@ -176,7 +176,7 @@ boolean = satisfy isBoolean
   >>= \c -> if c == T.pack "👍" then return True else return False
 
 list :: Parser a -> Parser b -> Parser [a]
-list getArg getOp = liftA2 (:) getArg (many (getOp *> getArg))
+list getArg getOp = (liftA2 (:) getArg (many (getOp *> getArg))) <|> return []
 
 identifier :: [[T.Text]] -> Parser [T.Text]
 identifier keywords =

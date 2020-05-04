@@ -117,15 +117,10 @@ identifiers = fmap
 
 lists :: Parser Expr
 lists =
-    (  openBracket
+    openBracket
         *> fmap List (ParserLib.list literals (charToken (T.pack "🔨")))
         <* closeBracket
-        )
-        <|> (do
-                openBracket
-                closeBracket
-                return (List [])
-            )
+
 
 strings :: Parser Expr
 strings = do
