@@ -10,10 +10,13 @@ expr :: Parser Expr
 expr = assignment
 
 assignment :: Parser Expr
-assignment = (do
-    k <- identifiers
-    charToken (T.pack "🖊️")
-    Assignment k <$> conditional) <|> conditional
+assignment =
+    (do
+            k <- identifiers
+            charToken (T.pack "🖊️")
+            Assignment k <$> conditional
+        )
+        <|> conditional
 
 conditional :: Parser Expr
 conditional = logicalOr
@@ -104,18 +107,32 @@ unary =
             -- imagine "➖➖", it wont be broken into two "➖"
             Unary Neg <$> unary
         )
+        <|> postfix
+
+postfix :: Parser Expr
+postfix =
+    (do
+            a <- atom
+            openParen
+            p <- ParserLib.list assignment (charToken (T.pack "🔨"))
+            closeParen
+            return (Postfix a p)
+        )
         <|> atom
 
 atom :: Parser Expr
 atom = literals <|> (openParen *> expr <* closeParen)
 
 literals :: Parser Expr
-literals = fmap Integer natural <|> fmap Boolean boolean <|> lists <|> identifiers <|> strings
+literals =
+    fmap Integer natural
+        <|> fmap Boolean boolean
+        <|> lists
+        <|> identifiers
+        <|> strings
 
 identifiers :: Parser Expr
-identifiers = fmap
-    Identifier
-    (ParserLib.identifier [])
+identifiers = fmap Identifier (ParserLib.identifier [])
 
 lists :: Parser Expr
 lists =
@@ -126,7 +143,7 @@ lists =
 
 strings :: Parser Expr
 strings = do
-            charToken (T.pack "🔠")
-            s <- ParserLib.string
-            charToken (T.pack "🔡")
-            return (String s)
+    charToken (T.pack "🔠")
+    s <- ParserLib.string
+    charToken (T.pack "🔡")
+    return (String s)

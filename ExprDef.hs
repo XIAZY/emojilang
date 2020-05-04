@@ -13,6 +13,7 @@ data Expr = Integer Integer
           | Identifier [T.Text]
           | Assignment Expr Expr
           | String [T.Text]
+          | Postfix Expr [Expr]
     deriving (Eq, Show)
 
 data BinaryOp = Add | Sub | Mult | Div
