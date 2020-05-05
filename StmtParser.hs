@@ -8,7 +8,7 @@ import           Control.Applicative
 import qualified Data.Text                     as T
 
 stmts :: Parser Stmt
-stmts = fmap Statements (some stmt)
+stmts = fmap Statements (many stmt)
 
 stmt :: Parser Stmt
 stmt = simple <|> compound
