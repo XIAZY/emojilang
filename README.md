@@ -65,6 +65,15 @@ Most of the above syntax is already working, actively adding more syntax for rea
 
 Quick Demo
 ```
-*MainParser> runStringParser mainParser "🔣🎅👉👈⏬🤔👉0️⃣🙆😀👈⏬😀🖊️➖➖1️⃣1️⃣4️⃣5️⃣1️⃣4️⃣😎😀↖️⬅️👉5️⃣➕4️⃣4️⃣➗7️⃣👈🙅🤜👍🔨🤜🤛🔨🔠📌📌📌🔡🖊️🤔🔨🤛📌🔠🔡🔨🔠🔡🤛😎⏫😱⏬🤔😄⏬🔁😄⏬😃😎⏫⏫😱⏬🤔😄⏬😃😎⏫⏫⏫⏫🎅👉👈😎"
-Just (Statements [Func (Identifier ["\127877"]) [] (Statements [If (Equality Eq (Integer 0) (Identifier ["\128512"])) (Statements [ExprStmt (Assignment (Identifier ["\128512"]) (Unary Neg (Unary Neg (Integer 114514)))),ExprStmt (Equality Ne (Relational Ge (Identifier ["\128512"]) (Binary Add (Integer 5) (Binary Div (Integer 44) (Integer 7)))) (List [Boolean True,List [],String ["\128204","\128289","\128394\65039","\129300","\128296","\129307","\128288"],String []]))]) (Just (Statements [If (Identifier ["\128516"]) (Statements [While (Identifier ["\128516"]) (Statements [ExprStmt (Identifier ["\128515"])])]) (Just (Statements [If (Identifier ["\128516"]) (Statements [ExprStmt (Identifier ["\128515"])]) Nothing]))]))]),ExprStmt (Postfix (Identifier ["\127877"]) [])])
+➜  emojilang git:(master) ghc MainParser
+[1 of 7] Compiling EmojiUtils       ( EmojiUtils.hs, EmojiUtils.o )
+[2 of 7] Compiling ExprDef          ( ExprDef.hs, ExprDef.o )
+[3 of 7] Compiling ParserLib        ( ParserLib.hs, ParserLib.o )
+[4 of 7] Compiling ParserExpr       ( ParserExpr.hs, ParserExpr.o )
+[5 of 7] Compiling StmtDef          ( StmtDef.hs, StmtDef.o )
+[6 of 7] Compiling StmtParser       ( StmtParser.hs, StmtParser.o )
+[7 of 7] Compiling Main             ( MainParser.hs, MainParser.o )
+Linking MainParser ...
+➜  emojilang git:(master) cat example.elang | ./MainParser
+Just (Statements [Func (Identifier ["\127877"]) [] (Statements [If (Equality Eq (Integer 0) (Identifier ["\128512"])) (Statements [ExprStmt (Assignment (Identifier ["\128512"]) (Unary Neg (Unary Neg (Integer 114514)))),ExprStmt (Equality Ne (Relational Ge (Identifier ["\128512"]) (Binary Add (Integer 5) (Binary Div (Integer 44) (Integer 7)))) (List [Boolean True,List [],String ["\128204","\128289","\128394\65039","\129300","\128296","\129307","\128288"],String []]))]) (Just (Statements [If (Identifier ["\128516"]) (Statements [While (Identifier ["\128516"]) (Statements [ExprStmt (Identifier ["\128515"])])]) (Just (Statements [If (Identifier ["\128516"]) (Statements [ExprStmt (Identifier ["\128515"])]) Nothing]))]))]),ExprStmt (Postfix (Identifier ["\127877"]) [])])%  
 ```
