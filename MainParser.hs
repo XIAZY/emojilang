@@ -15,4 +15,4 @@ main = do
     h              <- openFile filepath ReadMode
     hSetEncoding h utf8
     content <- hGetContents h
-    putStrLn (show (runStringParser mainParser content))
+    print (runStringParser mainParser content)
