@@ -14,13 +14,23 @@ stmt :: Parser Stmt
 stmt = simple <|> compound
 
 simple :: Parser Stmt
-simple = do
-    e <- PE.expr
-    charToken (T.pack "😎")
-    return (ExprStmt e)
+simple =
+    (do
+            e <- PE.expr
+            charToken (T.pack "😎")
+            return (ExprStmt e)
+        )
+        <|> returnStmt
 
 compound :: Parser Stmt
 compound = ifStmt <|> whileStmt <|> funcStmt
+
+returnStmt :: Parser Stmt
+returnStmt = do
+    charToken (T.pack "⤴️")
+    ret <- PE.conditional
+    charToken (T.pack "😎")
+    return (Return ret)
 
 ifStmt :: Parser Stmt
 ifStmt =

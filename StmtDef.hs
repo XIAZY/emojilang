@@ -7,4 +7,5 @@ data Stmt = ExprStmt ED.Expr
           | While ED.Expr Stmt
           | Func ED.Expr [ED.Expr] Stmt
           | Statements [Stmt]
+          | Return ED.Expr
     deriving (Eq, Show)
