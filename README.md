@@ -14,12 +14,12 @@ Emojilang solves this problem! No matter what language you speak, we all use  th
 <stmt> ::= <simple_stmt> | <compound_stmt>
 <simple_stmt> ::= <expr_stmt> | <return_stmt>
 <expr_stmt> ::= {<expr> "😎"}
-<compound_stmt> ::= <if> | <while> | <func>
+<compound_stmt> ::= <if> | <loop> | <func>
 <return_stmt> ::= "⤴️" <conditional> "😎"
 <if> ::= "🤔" <conditional> "⏬" <stmt> "⏫" ["😱" "⏬" <stmt> "⏫"]
        | <conditional> "🐴" "⏬" <stmt> "⏫" ["😱" "⏬" <stmt> "⏫"]
        // these two are absolutely the same. just here for internationalization!
-<while> ::= "🔁" <conditional> "⏬" <stmt> "⏫"
+<loop> ::= "🔁" <conditional> "⏬" <stmt> "⏫"
 <func> ::= "🔣" <identifier> "👉"[<identifier> {"🔨" <identifier>}] "👈" "⏬" <stmt> "⏫"
 
 <expr> ::= <assignment>
