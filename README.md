@@ -9,6 +9,13 @@ Most programming languages use English keywords. While it is true that English i
 
 Emojilang solves this problem! No matter what language you speak, we all use  the same Emoji to express ourselves. Everyone can code in Emojilang, even illiterate ones!
 
+# OKRs
+Emojilang is meant to be a dynamically typed language (at least for now). The short term goal is to implement its parser and interpreter.
+
+If everything's successful, I would like to implement an LLVM IR generator or other cool things like running on WebAssembly as a long term goal. However it is still too early to think of these cool features and there are quite a few foreseeable technical challenges.
+
+No compatibility is guaranteed.
+
 ## EBNF (as for now)
 ```
 <stmt> ::= <simple_stmt> | <compound_stmt>
