@@ -1,5 +1,5 @@
 .DS_Store
 *.hi
 *.o
-MainParser
 *.ll
+.stack-work
