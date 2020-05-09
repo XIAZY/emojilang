@@ -9,6 +9,10 @@ Most programming languages use English keywords. While it is true that English i
 
 Emojilang solves this problem! No matter what language you speak, we all use  the same Emoji to express ourselves. Everyone can code in Emojilang, even illiterate ones!
 
+Emojilang is implemented using pure Haskell. We use the [Stack](https://github.com/commercialhaskell/stack) build tool for software engineering purposes, as it handles build process and package management elegantly.
+
+Emojilang is licensed under MIT.
+
 # OKRs
 Emojilang is meant to be a dynamically typed language (at least for now). The short term goal is to implement its parser and interpreter.
 
@@ -73,16 +77,20 @@ Most of the above syntax is already working, actively adding more syntax for rea
 
 Quick Demo
 ```
-➜  emojilang git:(master) ghc MainParser.hs 
-[1 of 7] Compiling EmojiUtils       ( EmojiUtils.hs, EmojiUtils.o )
-[2 of 7] Compiling ExprDef          ( ExprDef.hs, ExprDef.o )
-[3 of 7] Compiling ParserLib        ( ParserLib.hs, ParserLib.o )
-[4 of 7] Compiling ParserExpr       ( ParserExpr.hs, ParserExpr.o )
-[5 of 7] Compiling StmtDef          ( StmtDef.hs, StmtDef.o )
-[6 of 7] Compiling StmtParser       ( StmtParser.hs, StmtParser.o )
-[7 of 7] Compiling Main             ( MainParser.hs, MainParser.o )
-Linking MainParser ...
+➜  emojilang git:(master) stack build
+emojilang-0.1.0.0: unregistering (local file changes: README.md)
+emojilang> configure (lib + exe)
+Configuring emojilang-0.1.0.0...
+emojilang> build (lib + exe)
+Preprocessing library for emojilang-0.1.0.0..
+Building library for emojilang-0.1.0.0..
+Preprocessing executable 'emojilang-exe' for emojilang-0.1.0.0..
+Building executable 'emojilang-exe' for emojilang-0.1.0.0..
+emojilang> copy/register
+Installing library in /Users/xia/Desktop/emojilang/.stack-work/install/x86_64-osx/b3d3d0865f1718b15b894e480712c20f16b1bb044abb42f8942327709b5e7176/8.8.3/lib/x86_64-osx-ghc-8.8.3/emojilang-0.1.0.0-I3SZgBakQf8BwhFOsUlvWI
+Installing executable emojilang-exe in /Users/xia/Desktop/emojilang/.stack-work/install/x86_64-osx/b3d3d0865f1718b15b894e480712c20f16b1bb044abb42f8942327709b5e7176/8.8.3/bin
+Registering library for emojilang-0.1.0.0..
 
-➜  emojilang git:(master) ./MainParser fibonacci.elang
-Just (Statements [Func (Identifier ["\129518"]) [Identifier ["\128290"]] (Statements [ExprStmt (Assignment (Identifier ["#\65039\8419","1\65039\8419"]) (Integer 0)),ExprStmt (Assignment (Identifier ["#\65039\8419","2\65039\8419"]) (Integer 1)),ExprStmt (Assignment (Identifier ["\128260"]) (Integer 2)),ExprStmt (Assignment (Identifier ["\128160"]) (Integer 1)),If (Equality Eq (Identifier ["\128290"]) (Integer 0)) (Statements [Return (Integer 0)]) Nothing,If (Equality Eq (Identifier ["\128290"]) (Integer 1)) (Statements [Return (Integer 1)]) Nothing,While (Relational Le (Identifier ["\128260"]) (Identifier ["#\65039\8419"])) (Statements [ExprStmt (Assignment (Identifier ["\128160"]) (Binary Add (Identifier ["#\65039\8419","1\65039\8419"]) (Identifier ["#\65039\8419","2\65039\8419"]))),ExprStmt (Assignment (Identifier ["#\65039\8419","1\65039\8419"]) (Identifier ["#\65039\8419","2\65039\8419"])),ExprStmt (Assignment (Identifier ["#\65039\8419","2\65039\8419"]) (Identifier ["\128160"]))]),Return (Identifier ["\128160"])]),ExprStmt (Postfix (Identifier ["\129518"]) [Integer 114514])])
+➜  emojilang git:(master) stack exec emojilang-exe src/examples/fibonacci.elang
+Just (Statements [Func (Identifier ["\129518"]) [Identifier ["\128290"]] (Statements [ExprStmt (Assignment (Identifier ["#\65039\8419","1\65039\8419"]) (Integer 0)),ExprStmt (Assignment (Identifier ["#\65039\8419","2\65039\8419"]) (Integer 1)),ExprStmt (Assignment (Identifier ["\128260"]) (Integer 2)),ExprStmt (Assignment (Identifier ["\128160"]) (Integer 1)),If (Equality Eq (Identifier ["\128290"]) (Integer 0)) (Statements [Return (Integer 0)]) Nothing,If (Equality Eq (Identifier ["\128290"]) (Integer 1)) (Statements [Return (Integer 1)]) Nothing,While (Relational Le (Identifier ["\128260"]) (Identifier ["\128290"])) (Statements [ExprStmt (Assignment (Identifier ["\128160"]) (Binary Add (Identifier ["#\65039\8419","1\65039\8419"]) (Identifier ["#\65039\8419","2\65039\8419"]))),ExprStmt (Assignment (Identifier ["#\65039\8419","1\65039\8419"]) (Identifier ["#\65039\8419","2\65039\8419"])),ExprStmt (Assignment (Identifier ["#\65039\8419","2\65039\8419"]) (Identifier ["\128160"]))]),Return (Identifier ["\128160"])]),ExprStmt (Postfix (Identifier ["\129518"]) [Integer 114514])])
 ```
