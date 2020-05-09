@@ -15,11 +15,6 @@ data Parser a = MkParser ([T.Text] -> Maybe ([T.Text], a))
 unParser :: Parser a -> [T.Text] -> Maybe ([T.Text], a)
 unParser (MkParser sf) = sf
 
-runStringParser :: Parser a -> String -> Maybe a
-runStringParser p inputString = runParser p (EmojiUtils.getEmoji inputString)
-
-runParser :: Parser a -> [T.Text] -> Maybe a
-runParser (MkParser sf) input = fmap snd (sf input)
 
 instance Functor Parser where
     -- fmap :: (a -> b) -> Parser a -> Parser b
