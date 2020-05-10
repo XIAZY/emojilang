@@ -1,7 +1,7 @@
 library:
   source-dirs: src
-copyright: 2020 Zhongyang Xia
-maintainer: zhongyang.xia@mailutoronto.ca
+copyright: 2020 XIAXY
+maintainer: i@mechanus.io
 dependencies:
 - containers
 - text
@@ -12,7 +12,7 @@ version: 0.1.0.0
 extra-source-files:
 - README.md
 - ChangeLog.md
-author: Zhongyang Xia
+author: XIAZY
 github: XIAZY/emojilang
 license: MIT
 executables:
@@ -25,4 +25,4 @@ executables:
     - -with-rtsopts=-N
     dependencies:
     - emojilang
-description: Please see the README on GitHub at <https://github.com/githubuser/emojilang#readme>
+description: Please see the README on GitHub at <https://github.com/xiazy/emojilang#readme>

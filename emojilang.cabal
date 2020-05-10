@@ -4,16 +4,16 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 5e6406fabd7cf23b82ac3345152b5b001a160eb62bfc5e21e6967f3e3df39467
+-- hash: 2450a0ec4cc56df3a0a4957de21214db9e3ed5af4b306a6f82fb29411f5b558c
 
 name:           emojilang
 version:        0.1.0.0
-description:    Please see the README on GitHub at <https://github.com/githubuser/emojilang#readme>
+description:    Please see the README on GitHub at <https://github.com/xiazy/emojilang#readme>
 homepage:       https://github.com/XIAZY/emojilang#readme
 bug-reports:    https://github.com/XIAZY/emojilang/issues
-author:         Zhongyang Xia
-maintainer:     zhongyang.xia@mailutoronto.ca
-copyright:      2020 Zhongyang Xia
+author:         XIAZY
+maintainer:     i@mechanus.io
+copyright:      2020 XIAXY
 license:        MIT
 license-file:   LICENSE
 build-type:     Simple
