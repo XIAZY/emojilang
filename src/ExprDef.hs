@@ -2,6 +2,9 @@ module ExprDef where
 
 import qualified Data.Text                     as T
 
+data Var = MkVar [T.Text]
+    deriving (Ord, Show, Eq)
+
 data Expr = Integer Integer
           | Binary BinaryOp Expr Expr
           | Unary UnaryOp Expr
@@ -10,7 +13,7 @@ data Expr = Integer Integer
           | Conditional LogicalOp Expr Expr
           | Boolean Bool
           | List [Expr]
-          | Identifier [T.Text]
+          | Identifier Var
           | Assignment Expr Expr
           | String [T.Text]
           | Postfix Expr [Expr]

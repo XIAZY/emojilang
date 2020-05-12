@@ -132,7 +132,7 @@ literals =
         <|> strings
 
 identifiers :: Parser Expr
-identifiers = fmap Identifier (ParserLib.identifier [])
+identifiers = fmap (Identifier . MkVar) (ParserLib.identifier [])
 
 lists :: Parser Expr
 lists =
