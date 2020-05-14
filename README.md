@@ -73,7 +73,8 @@ No compatibility is guaranteed.
 ```
 
 # Current state
-Implementing parser to generate syntax tree.
+✔️ Implementing parser to generate syntax tree.
+🏗️ Implementing interpreter to interpret the syntax tree
 
 Most of the above syntax is already working, actively adding more syntax for real world uses.
 
