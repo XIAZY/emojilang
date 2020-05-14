@@ -1,11 +1,11 @@
 # emojilang
 抽象话编程语言
 
-Short version:
+## Short version
 
 ~~Toy~~ Programming language using solely emoji
 
-Long version:
+## Long version
 
 Most programming languages use English keywords. While it is true that English is the de-facto international language, it is an extra burden for programmers who don't speak English well.
 
@@ -15,7 +15,7 @@ Emojilang is implemented using pure Haskell. We use the [Stack](https://github.c
 
 Emojilang is licensed under MIT.
 
-# OKRs
+## OKRs
 Emojilang is meant to be a dynamically typed language (at least for now). The short term goal is to implement its parser and interpreter.
 
 If everything's successful, I would like to implement an LLVM IR generator or other cool things like running on WebAssembly as a long term goal. However it is still too early to think of these cool features and there are quite a few foreseeable technical challenges.
@@ -73,7 +73,8 @@ No compatibility is guaranteed.
 ```
 
 # Current state
-✔️ Implementing parser to generate syntax tree.
+✔️ Implemented parser to generate syntax tree.
+
 🏗️ Implementing interpreter to interpret the syntax tree
 
 Most of the above syntax is already working, actively adding more syntax for real world uses.
