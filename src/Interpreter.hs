@@ -15,14 +15,17 @@ runFreshInterp (Just stmt) = runInterp stmt M.empty
 
 eval :: StateMonad m => ED.Expr -> m ED.Expr
 eval var@(ED.Identifier _      ) = get var
-eval (    ED.Binary binOp e1 e2) = liftA2 op v1 v2
+eval (    ED.Binary binOp e1 e2) = liftA2 delegate v1 v2
  where
   v1 = eval e1
   v2 = eval e2
-  op = case binOp of
-    ED.Add -> \(ED.Integer i1) (ED.Integer i2) -> ED.Integer (i1 + i2)
-        -- ED.Sub  -> (-)
-        -- ED.Mult -> (*)
+  delegate (ED.Integer i1) (ED.Integer i2) = ED.Integer (intOp i1 i2)
+  -- technically we should use a monad here. but there are some technical difficulties
+  -- turing Expr into a monad. Integer isnt the only constructor in it
+  intOp = case binOp of
+    ED.Add -> (+)
+    ED.Sub  -> (-)
+    ED.Mult -> (*)
         --   we'll deal with div later
 eval a = return a
 
