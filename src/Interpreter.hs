@@ -26,7 +26,7 @@ eval (    ED.Binary binOp e1 e2) = liftA2 delegate v1 v2
     ED.Add  -> (+)
     ED.Sub  -> (-)
     ED.Mult -> (*)
-        --   we'll deal with div later
+    ED.Div  -> div
 eval a = return a
 
 interp :: (StateMonad m) => SD.Stmt -> m ()
