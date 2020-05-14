@@ -23,7 +23,7 @@ eval (    ED.Binary binOp e1 e2) = liftA2 delegate v1 v2
   -- technically we should use a monad here. but there are some technical difficulties
   -- turing Expr into a monad. Integer isnt the only constructor in it
   intOp = case binOp of
-    ED.Add -> (+)
+    ED.Add  -> (+)
     ED.Sub  -> (-)
     ED.Mult -> (*)
         --   we'll deal with div later
