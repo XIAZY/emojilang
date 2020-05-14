@@ -14,7 +14,7 @@ data Expr = Integer Integer
           | Boolean Bool
           | List [Expr]
           | Identifier Var
-          | Assignment Expr Expr
+          | Assignment Var Expr
           | String [T.Text]
           | Postfix Expr [Expr]
     deriving (Eq, Show)

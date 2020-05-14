@@ -4,18 +4,21 @@ import           Control.Applicative
 import qualified ExprDef                       as ED
 import qualified Data.Map                      as M
 
-
 data State a = MkSM (M.Map ED.Var ED.Expr -> [(M.Map ED.Var ED.Expr, a)])
 
 unSM :: State a -> (M.Map ED.Var ED.Expr -> [(M.Map ED.Var ED.Expr, a)])
 unSM (MkSM f) = f
 
 class (Monad m, Alternative m) => StateMonad m where
-    get :: ED.Var -> m (Maybe ED.Expr)
+    get :: ED.Var -> m ED.Expr
     set :: ED.Var -> ED.Expr -> m ()
 
 instance StateMonad State where
-    get x = MkSM (\m -> [(m, M.lookup x m)])
+    get x = MkSM (\m -> let res = M.lookup x m in 
+                    case res of
+                        (Just expr) -> [(m, expr)]
+                        Nothing -> (error "variable not found")
+                        )
     set x v = MkSM (\m -> [(M.insert x v m, ())])
 
 instance Monad State where

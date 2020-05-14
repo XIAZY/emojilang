@@ -128,11 +128,15 @@ literals =
     fmap Integer natural
         <|> fmap Boolean boolean
         <|> lists
-        <|> identifiers
+        <|> identifierExpr
         <|> strings
 
-identifiers :: Parser Expr
-identifiers = fmap (Identifier . MkVar) (ParserLib.identifier [])
+
+identifierExpr :: Parser Expr
+identifierExpr = fmap Identifier identifiers
+
+identifiers :: Parser Var
+identifiers = fmap MkVar (ParserLib.identifier [])
 
 lists :: Parser Expr
 lists =
