@@ -36,5 +36,5 @@ instance Functor State where
     fmap f p = p >>= \a -> return (f a)
 
 instance Alternative State where
-    empty = MkSM (\s -> [])
-    MkSM f <|> MkSM g = MkSM (\a -> concat [f a, g a])
+    empty = MkSM (const [])
+    MkSM f <|> MkSM g = MkSM (\a -> f a ++ g a)
