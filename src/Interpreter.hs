@@ -27,6 +27,14 @@ eval (    ED.Binary binOp e1 e2) = liftA2 delegate v1 v2
     ED.Sub  -> (-)
     ED.Mult -> (*)
     ED.Div  -> div
+eval (ED.Equality eqOp e1 e2) = liftA2 delegate v1 v2
+ where
+  v1 = eval e1
+  v2 = eval e2
+  op = case eqOp of
+    ED.Eq -> (==)
+    _     -> (/=)
+  delegate i1 i2 = ED.Boolean (op i1 i2)
 eval a = return a
 
 interp :: (StateMonad m) => SD.Stmt -> m ()
