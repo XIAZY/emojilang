@@ -49,7 +49,9 @@ interp (SD.Statements stmts) = run stmts
   run (s : xs) = interp s *> run xs
 interp (SD.If cond todo elze) = eval cond >>= \c -> case c of
   ED.Boolean True -> interp todo
-  _ ->
-    case elze of
-     (Just s) -> interp s
-     _        -> return ()
+  _               -> case elze of
+    (Just s) -> interp s
+    _        -> return ()
+interp this@(SD.While cond todo) = eval cond >>= \c -> case c of
+  ED.Boolean True -> interp todo *> interp this
+  _               -> return ()
