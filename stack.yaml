@@ -17,7 +17,7 @@
 #
 # resolver: ./custom-snapshot.yaml
 # resolver: https://example.com/snapshots/2018-01-01.yaml
-resolver: lts-15.11
+resolver: lts-18.20
 
 # User packages to be built.
 # Various formats can be used as shown in the example below.
@@ -34,8 +34,7 @@ packages:
 # These entries can reference officially published versions as well as
 # forks / in-progress versions pinned to a git hash. For example:
 #
-extra-deps:
-- text-icu-0.7.1.0@sha256:44e8b5966fcf61356a7356f3d2e8a5c5cc538170a15e94ff7b79b9f48ce9fd2f,3497
+# extra-deps:
 
 # - acme-missiles-0.3
 # - git: https://github.com/commercialhaskell/stack.git
