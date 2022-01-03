@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 99b5ff5041e4a8f4cee52d8348c1aee9dd8d535162f74a195245a5cdeeaba51a
+-- hash: e79bfccb09c3160d38cce8137a7f301d9d488b40e51d6f2e33bbe6f6793c0d54
 
 name:           emojilang
 version:        0.1.0.0
@@ -30,10 +30,10 @@ library
       EmojiUtils
       ExprDef
       Interpreter
+      InterpValues
       MainParser
       ParserExpr
       ParserLib
-      State
       StmtDef
       StmtParser
   other-modules:
