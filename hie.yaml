@@ -1,0 +1,10 @@
+cradle:
+  cabal:
+    - path: "src"
+      component: "lib:emojilang"
+
+    - path: "app/Main.hs"
+      component: "emojilang:exe:emojilang-exe"
+
+    - path: "app/Paths_emojilang.hs"
+      component: "emojilang:exe:emojilang-exe"
