@@ -3,7 +3,7 @@
 
 ## Short version
 
-~~Toy~~ Programming language using solely emoji
+Toy Programming language using solely emoji
 
 ## Long version
 
@@ -15,13 +15,19 @@ Emojilang is implemented using pure Haskell. We use the [Stack](https://github.c
 
 Emojilang is licensed under MIT.
 
-## OKRs
-Emojilang is meant to be a dynamically typed language (at least for now). The short term goal is to implement its parser and interpreter.
+## Usage
+In order to compile this project, you need to have stack installed. Usually stack automatically installs ghc for you, but if you can't (e.g., you are on an Apple Silicon Mac, which stack doesn't recognize), you can install ghc using `brew install ghc`. Stack will complain, but it can pickup system ghc (and compile native arm64 code using the LLVM backend)
 
-If everything's successful, I would like to implement an LLVM IR generator or other cool things like running on WebAssembly as a long term goal. However it is still too early to think of these cool features and there are quite a few foreseeable technical challenges.
+Run `stack build` to build the project.
 
-No compatibility is guaranteed.
+Example:
+[Fibonacci.elang](https://github.com/XIAZY/emojilang/blob/master/src/examples/fibonacci.elang) is an example of emojilang source code. As you can see, it is completely written in emoji, so that anyone can comprehend it.
 
+Run the code using `stack run emojilang-exe ./src/examples/fibonacci.elang`, and you should see fibonacci sequence at 114514th position.
+
+At this time, emojilang can handle branches, loops and functions with very limited types.
+
+~~Realistically speaking, it's probably much easier to compile to LLVM IR, as we are all familiar with it~~
 ## EBNF (as for now)
 ```
 <stmt> ::= <simple_stmt> | <compound_stmt>
